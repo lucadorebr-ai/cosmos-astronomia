@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Cosmos: aprenda astronomia e prepare-se para a OBA.">
+<title>Cosmos — Astronomia & OBA</title>
+<style>
+:root{--bg:#050817;--card:#0c142b;--card2:#101c38;--line:#23365d;--text:#f5f8ff;--muted:#aebcda;--blue:#69b0ff;--purple:#9b7cff;--gold:#ffd76a}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 80% 0,#182d65 0,transparent 30%),var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}a{text-decoration:none;color:inherit}.wrap{width:min(1180px,calc(100% - 40px));margin:auto}
+header{position:sticky;top:0;z-index:10;background:#050817d9;backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+nav{height:70px;display:flex;align-items:center;justify-content:space-between}.logo{font-size:24px;font-weight:950}.logo span{color:var(--blue)}.links{display:flex;gap:25px;color:var(--muted);font-size:14px}.links a:hover{color:#fff}.premiumNav{color:#ffd76a!important;font-weight:850}
+.hero{padding:75px 0 45px}.heroGrid{display:grid;grid-template-columns:1.2fr .8fr;gap:30px;align-items:center}.eyebrow{display:inline-flex;padding:7px 12px;border:1px solid #34558d;background:#0b1835;border-radius:999px;color:#91c7ff;font-size:13px;font-weight:700}.hero h1{font-size:clamp(44px,6vw,74px);line-height:.98;margin:18px 0}.hero p{font-size:19px;color:var(--muted);line-height:1.65;max-width:680px}.cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:25px}.btn{border:0;border-radius:12px;padding:14px 18px;font-weight:850;cursor:pointer;background:var(--blue);color:#061126}.btn.secondary{background:#152443;color:#e7efff;border:1px solid #29426d}
+.premium{background:linear-gradient(145deg,#161d42,#11172d);border:1px solid #4b4380;border-radius:25px;padding:27px;box-shadow:0 20px 70px #0005}.premium .price{font-size:38px;font-weight:950;color:var(--gold);margin:8px 0}.premium ul{padding-left:20px;color:#cbd6ee;line-height:2}.premium small{color:#94a4c6}
+section{padding:58px 0}.title{font-size:34px;margin:0 0 10px}.subtitle{color:var(--muted);line-height:1.6;margin-top:0}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.card{background:var(--card);border:1px solid var(--line);border-radius:19px;padding:22px}.card h3{margin:10px 0 8px}.card p{color:var(--muted);line-height:1.55;margin:0}.icon{font-size:29px}.tag{display:inline-block;margin-top:14px;padding:5px 9px;border-radius:999px;font-size:11px;background:#182847;color:#a8caff}.tag.p{background:#32275d;color:#dbcfff}
+.study{display:grid;grid-template-columns:1fr 1fr;gap:20px}.panel{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:25px}.select{width:100%;padding:13px;background:#071025;color:white;border:1px solid #34527f;border-radius:11px;margin:8px 0 15px}.levels{display:flex;gap:8px;flex-wrap:wrap;margin:15px 0}.level{padding:8px 11px;border:1px solid #2c4774;border-radius:999px;color:#afc1e1;font-size:12px}.challenge{display:none;margin-top:16px;background:#081126;border:1px solid #294572;border-radius:14px;padding:17px}.answer{display:none;color:#8fe0ae;margin-top:10px}.list{color:var(--muted);line-height:2;padding-left:22px}
+footer{padding:35px 0;border-top:1px solid var(--line);color:#8798bb;text-align:center}
+.modal{display:none;position:fixed;inset:0;background:#0009;z-index:30;align-items:center;justify-content:center;padding:20px}.modalBox{width:min(520px,100%);background:#0b132a;border:1px solid #3d5684;border-radius:22px;padding:26px}.close{float:right;background:none;border:0;color:#9eb0d0;font-size:24px;cursor:pointer}
+@media(max-width:800px){.wrap{width:min(100% - 26px,680px)}.links{display:none}.hero{padding-top:45px}.heroGrid,.study{grid-template-columns:1fr}.grid{grid-template-columns:1fr 1fr}.hero h1{font-size:50px}.premium{padding:22px}}
+@media(max-width:500px){.grid{grid-template-columns:1fr}.hero p{font-size:17px}.title{font-size:29px}.cta .btn{width:100%}}
+
+.levelbox{margin-top:18px;background:#091329;border:1px solid #294572;border-radius:15px;padding:16px}
+.leveltop{display:flex;justify-content:space-between;gap:10px;align-items:center}.rank{font-weight:950;font-size:18px}.xp{color:#aebcda;font-size:13px}.bar{height:10px;background:#182642;border-radius:999px;overflow:hidden;margin-top:11px}.fill{height:100%;width:0;background:linear-gradient(90deg,#69b0ff,#9b7cff);transition:width .5s}
+.daily{background:linear-gradient(135deg,#0d1d3c,#151238);border-color:#38578b}.daily h3{font-size:20px}.reward{color:#ffd76a;font-weight:800}.rankCards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:18px}.rankCard{padding:17px;border:1px solid var(--line);border-radius:15px;background:#0b142a;text-align:center}.rankCard b{display:block;font-size:22px;margin-bottom:5px}.rankCard span{font-size:12px;color:var(--muted)}
+@media(max-width:800px){.rankCards{grid-template-columns:repeat(2,1fr)}}
+
+/* COSMOS 2.0 */
+.biggrid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.wide{grid-column:span 2}
+.planet{cursor:pointer;transition:.2s}.planet:hover{transform:translateY(-3px);border-color:#4d76b1}
+.profile{display:grid;grid-template-columns:110px 1fr;gap:20px;align-items:center}.avatar{width:100px;height:100px;border-radius:50%;display:grid;place-items:center;background:#17284b;font-size:52px;border:2px solid #385a8e}
+.statrow{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.stat{background:#0a1328;border:1px solid var(--line);border-radius:13px;padding:13px;text-align:center}.stat b{display:block;font-size:21px}.stat span{font-size:11px;color:var(--muted)}
+.mission{background:linear-gradient(135deg,#101c3e,#1b1740);border-color:#51488b}.mission .reward{color:#ffd76a;font-weight:850}
+.quiz{background:#091329}.option{display:block;width:100%;margin:8px 0;text-align:left;background:#121f3b;color:#dfeaff;border:1px solid #2c4774}.option:hover{border-color:#69b0ff}
+.event{display:flex;gap:14px;align-items:center}.event .icon{font-size:40px}.event b{display:block;margin-bottom:5px}.event span{color:var(--muted);font-size:13px}
+.planetModal{display:none;position:fixed;inset:0;background:#000b;z-index:40;align-items:center;justify-content:center;padding:20px}.planetBox{width:min(600px,100%);background:#0b142b;border:1px solid #38527e;border-radius:22px;padding:26px}.close2{float:right;border:0;background:none;color:#aab9d8;font-size:25px;cursor:pointer}
+@media(max-width:800px){.biggrid{grid-template-columns:1fr}.wide{grid-column:auto}.profile{grid-template-columns:1fr;text-align:center}.avatar{margin:auto}.statrow{grid-template-columns:repeat(2,1fr)}}
+
+.extraGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.career{min-height:170px}.calendar{display:grid;gap:10px}.calendarItem{padding:14px;background:#0a1429;border:1px solid var(--line);border-radius:13px}.map{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:20px}.mapNode{padding:13px 16px;border-radius:13px;background:#101f3d;border:1px solid #315181;text-align:center}.arrow{color:#6faeff;font-size:22px}.questionFilter{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.pill{border:1px solid #2e4771;background:#101d37;color:#c8d7ef;border-radius:999px;padding:8px 11px;font-size:12px}.premiumStrip{margin-top:18px;padding:18px;border-radius:16px;background:linear-gradient(90deg,#161c40,#2a1947);border:1px solid #51458b;display:flex;justify-content:space-between;align-items:center;gap:15px}
+@media(max-width:900px){.extraGrid{grid-template-columns:repeat(2,1fr)}}@media(max-width:500px){.extraGrid{grid-template-columns:1fr}.premiumStrip{display:block}.premiumStrip .btn{margin-top:12px}}
+
+/* Correção do banner Premium no celular */
+.premiumStrip .subtitle{font-size:16px}
+@media(max-width:500px){
+  .premiumStrip{padding:20px 18px;text-align:left}
+  .premiumStrip .subtitle{display:block;font-size:15px;line-height:1.45;margin-top:5px}
+  .premiumStrip .btn{display:block;width:100%;margin-top:16px;text-align:center}
+}
+
+.langBtn{border:1px solid #2f4770;background:#0d1830;color:#cfe0fb;border-radius:10px;padding:7px 9px;font-weight:800;cursor:pointer;margin-left:4px}
+.langBtn.active{background:#35598d;color:#fff}
+@media(max-width:700px){.langBtn{padding:6px 7px;font-size:11px}}
+</style>
+</head>
+<body>
+<header><div class="wrap"><nav><a class="logo" href="#">COSMOS<span>★</span></a><div class="links"><a href="#universo">Universo</a><a href="#oba">OBA</a><a class="premiumNav" href="#premium">🛒 Comprar Premium • R$ 5,99</a><a href="#desafios">Desafios</a></div></nav></div></header>
+<a class="buytab" href="#premium">🛒 Comprar Premium<br><small>R$ 5,99</small></a>
+<style>
+.buytab{position:fixed;right:18px;bottom:18px;z-index:20;background:#ffd76a;color:#071126;padding:12px 16px;border-radius:14px;font-weight:950;box-shadow:0 10px 35px #0007;text-align:center}
+.buytab small{font-weight:750}
+@media(max-width:500px){.buytab{right:12px;left:12px;bottom:12px}}
+</style>
+
+<main>
+<section class="hero"><div class="wrap heroGrid">
+<div>
+<span class="eyebrow">🌌 ASTRONOMIA + OBA</span>
+<h1>Descubra o Universo.<br>Prepare-se para a OBA.</h1>
+<p>Aprenda astronomia de um jeito divertido, escolha seu nível e treine com desafios. Funciona no computador, tablet e celular.</p>
+<div class="cta"><a class="btn" href="#oba">Começar a estudar</a><a class="btn secondary" href="#universo">Explorar astronomia</a></div>
+</div>
+<div class="premium" id="premium">
+<div>🚀 <b>Recursos extras</b></div>
+<div class="price">R$ 5,99</div>
+<p class="subtitle">por acesso aos recursos extras</p>
+<ul><li>Simulados completos da OBA</li><li>Desafios ilimitados</li><li>XP, níveis e medalhas</li><li>Relatório de progresso</li><li>Trilhas de estudo personalizadas</li></ul>
+<button class="btn" onclick="openModal()">Quero recursos extras</button><br><small>O pagamento ainda não está conectado nesta versão.</small>
+<div class="levelbox">
+<div class="leveltop"><span class="rank" id="rank">🥉 BRONZE</span><span class="xp" id="xptxt">0 / 500 XP</span></div>
+<div class="bar"><div class="fill" id="xpfill"></div></div>
+</div>
+</div>
+</div></section>
+
+<section id="universo"><div class="wrap">
+<h2 class="title">🌠 Explore o Universo</h2><p class="subtitle">Um mapa de assuntos para começar sua jornada.</p>
+<div class="grid">
+<div class="card"><div class="icon">☀️</div><h3>Sistema Solar</h3><p>Sol, planetas, luas, cometas, asteroides e planetas anões.</p></div>
+<div class="card"><div class="icon">⭐</div><h3>Estrelas</h3><p>Nascimento, evolução, energia, supernovas e estrelas de nêutrons.</p></div>
+<div class="card"><div class="icon">🌍</div><h3>Terra e Lua</h3><p>Rotação, translação, fases, eclipses e estações do ano.</p></div>
+<div class="card"><div class="icon">🌌</div><h3>Galáxias</h3><p>Via Láctea, tipos de galáxias, matéria escura e estrutura cósmica.</p></div>
+<div class="card"><div class="icon">🕳️</div><h3>Buracos negros</h3><p>Gravidade extrema, horizonte de eventos e espaço-tempo.</p></div>
+<div class="card"><div class="icon">🚀</div><h3>Astronáutica</h3><p>Foguetes, órbitas, satélites e exploração espacial.</p></div>
+</div></div></section>
+
+<section id="oba"><div class="wrap">
+<h2 class="title">🏆 Treine para a OBA</h2><p class="subtitle">Escolha seu nível e receba um desafio.</p>
+<div class="study">
+<div class="panel"><label><b>Qual é o seu nível?</b></label>
+<select id="level" class="select"><option value="iniciante">🌱 Iniciante</option><option value="intermediario">🚀 Intermediário</option><option value="avancado">🌟 Avançado</option></select>
+<button class="btn" onclick="challenge()">Gerar desafio</button><button class="btn secondary" onclick="answer()">Ver resposta</button>
+<div id="challenge" class="challenge"><b id="ct"></b><p id="cq" class="subtitle"></p><div id="ans" class="answer"></div></div></div>
+<div class="panel"><h3>📚 Trilha recomendada</h3><ol class="list"><li>Terra, Lua e céu</li><li>Sistema Solar</li><li>Gravitação e órbitas</li><li>Estrelas</li><li>Galáxias e cosmologia</li><li>Astronáutica</li></ol></div>
+</div></div></section>
+
+<section id="desafios"><div class="wrap">
+<h2 class="title">🔥 Desafios e níveis</h2><p class="subtitle">Estude todos os dias, ganhe XP e evolua de Bronze até Platina.</p>
+<div class="grid">
+<div class="card daily"><div class="icon">🔥</div><h3>Desafio Diário</h3><p id="dailyq">Por que a Lua apresenta fases diferentes?</p><p class="reward">+50 XP por acertar</p><button class="btn" onclick="dailyAnswer()">Responder</button><div id="dailyans" class="answer">Porque vemos diferentes porções iluminadas da Lua conforme ela orbita a Terra.</div></div>
+<div class="card"><div class="icon">🏆</div><h3>Desafios OBA</h3><p>Questões por assunto e dificuldade para você treinar para a Olimpíada.</p><span class="tag p">PREMIUM: desafios extras</span><br><button class="btn" style="margin-top:14px" onclick="challenge()">Começar</button></div>
+<div class="card"><div class="icon">⏱️</div><h3>Simulado OBA</h3><p>Faça uma prova com tempo, pontuação e resultado final.</p><span class="tag p">PREMIUM</span></div>
+</div>
+<h2 class="title" style="margin-top:45px">🏅 Sua evolução</h2>
+<div class="rankCards">
+<div class="rankCard"><b>🥉 Bronze</b><span>0–499 XP</span></div>
+<div class="rankCard"><b>🥈 Prata</b><span>500–1.499 XP</span></div>
+<div class="rankCard"><b>🥇 Ouro</b><span>1.500–2.999 XP</span></div>
+<div class="rankCard"><b>💎 Platina</b><span>3.000+ XP</span></div>
+</div>
+</div></section>
+</main>
+
+<section id="universo-completo"><div class="wrap">
+<h2 class="title">🪐 Conheça os planetas</h2><p class="subtitle">Clique em um planeta para descobrir mais.</p>
+<div class="biggrid">
+<div class="card planet" onclick="planet('Mercúrio','O planeta mais próximo do Sol e um dos menores do Sistema Solar.')"><div class="icon">☿️</div><h3>Mercúrio</h3><p>Pequeno e extremo.</p></div>
+<div class="card planet" onclick="planet('Vênus','Tem uma atmosfera muito densa e uma superfície extremamente quente.')"><div class="icon">🟠</div><h3>Vênus</h3><p>Um mundo coberto por nuvens.</p></div>
+<div class="card planet" onclick="planet('Terra','Nosso planeta, com água líquida abundante e vida conhecida.')"><div class="icon">🌍</div><h3>Terra</h3><p>Nosso lar cósmico.</p></div>
+<div class="card planet" onclick="planet('Marte','Um planeta rochoso famoso por sua superfície avermelhada e por ser alvo de exploração.')"><div class="icon">🔴</div><h3>Marte</h3><p>O planeta vermelho.</p></div>
+<div class="card planet" onclick="planet('Júpiter','O maior planeta do Sistema Solar, um gigante gasoso com muitas luas.')"><div class="icon">🟤</div><h3>Júpiter</h3><p>O gigante do Sistema Solar.</p></div>
+<div class="card planet" onclick="planet('Saturno','Gigante gasoso conhecido por seu impressionante sistema de anéis.')"><div class="icon">🪐</div><h3>Saturno</h3><p>O planeta dos anéis.</p></div>
+</div></div></section>
+
+<section><div class="wrap"><div class="biggrid">
+<div class="card wide"><h2>👤 Meu perfil</h2><div class="profile"><div class="avatar">🧑‍🚀</div><div><h3 style="margin:0">Explorador do Cosmos</h3><p class="subtitle">Continue estudando para evoluir.</p><div class="statrow"><div class="stat"><b id="profileXP">0</b><span>XP</span></div><div class="stat"><b>0</b><span>Medalhas</span></div><div class="stat"><b>0</b><span>Desafios</span></div><div class="stat"><b>🔥 1</b><span>Sequência</span></div></div></div></div></div>
+<div class="card mission"><div class="icon">🚀</div><h3>Missão Espacial #1</h3><p>Complete desafios sobre Marte.</p><p class="reward">Recompensa: +250 XP + 🏅 Explorador de Marte</p><button class="btn" onclick="updateXP(250);alert('Missão concluída! +250 XP 🚀')">Concluir missão</button></div>
+</div></div></section>
+
+<section><div class="wrap"><h2 class="title">🔭 O céu agora</h2><div class="grid">
+<div class="card event"><div class="icon">🌙</div><div><b>Fases da Lua</b><span>Aprenda a identificar a fase e entender seu movimento.</span></div></div>
+<div class="card event"><div class="icon">☄️</div><div><b>Chuva de meteoros</b><span>Descubra como observar meteoros e por que eles aparecem.</span></div></div>
+<div class="card event"><div class="icon">🌟</div><div><b>Constelações</b><span>Aprenda a encontrar padrões de estrelas no céu.</span></div></div>
+</div></div></section>
+
+<section><div class="wrap"><div class="biggrid">
+<div class="card wide quiz"><h2>🧠 Quiz relâmpago</h2><p class="subtitle">Qual é o maior planeta do Sistema Solar?</p>
+<button class="btn option" onclick="quiz(this,false)">A) Terra</button><button class="btn option" onclick="quiz(this,true)">B) Júpiter</button><button class="btn option" onclick="quiz(this,false)">C) Marte</button><p id="quizResult" class="reward"></p></div>
+<div class="card"><h2>🎖️ Medalhas</h2><p class="subtitle">Desbloqueie conquistas estudando.</p><div class="levels"><span class="level">🌙 Mestre da Lua</span><span class="level">☀️ Explorador do Sol</span><span class="level">🪐 Planetas</span><span class="level">🚀 Astronáutica</span></div></div>
+</div></div></section>
+
+<div class="planetModal" id="planetModal"><div class="planetBox"><button class="close2" onclick="closePlanet()">×</button><h2 id="planetTitle"></h2><p id="planetText" class="subtitle"></p><button class="btn" onclick="closePlanet()">Continuar explorando</button></div></div>
+
+<section><div class="wrap">
+<h2 class="title">📚 Enciclopédia Cosmos</h2><p class="subtitle">Pesquise e descubra novos assuntos.</p>
+<div class="extraGrid">
+<div class="card"><div class="icon">🌠</div><h3>Nebulosas</h3><p>Nuvens gigantes de gás e poeira no espaço.</p></div>
+<div class="card"><div class="icon">💥</div><h3>Supernovas</h3><p>Explosões extremamente energéticas de estrelas.</p></div>
+<div class="card"><div class="icon">🌑</div><h3>Exoplanetas</h3><p>Planetas que orbitam outras estrelas.</p></div>
+<div class="card"><div class="icon">☄️</div><h3>Cometas</h3><p>Corpos gelados que podem formar uma cauda ao se aproximar do Sol.</p></div>
+</div></div></section>
+
+<section><div class="wrap">
+<h2 class="title">🗺️ Mapa do Universo</h2><p class="subtitle">Faça uma viagem das nossas vizinhanças até as maiores estruturas conhecidas.</p>
+<div class="map"><div class="mapNode">🌍 Terra</div><div class="arrow">→</div><div class="mapNode">☀️ Sistema Solar</div><div class="arrow">→</div><div class="mapNode">🌌 Via Láctea</div><div class="arrow">→</div><div class="mapNode">🌌 Grupo Local</div><div class="arrow">→</div><div class="mapNode">✨ Universo observável</div></div>
+</div></section>
+
+<section><div class="wrap">
+<h2 class="title">🚀 Missões espaciais</h2><p class="subtitle">Complete missões para ganhar XP.</p>
+<div class="extraGrid">
+<div class="card mission"><h3>🌙 Missão Lua</h3><p>5 desafios sobre nosso satélite.</p><p class="reward">+150 XP</p></div>
+<div class="card mission"><h3>🔴 Missão Marte</h3><p>5 desafios sobre o planeta vermelho.</p><p class="reward">+250 XP</p></div>
+<div class="card mission"><h3>🪐 Missão Saturno</h3><p>5 desafios sobre gigantes gasosos.</p><p class="reward">+300 XP</p></div>
+<div class="card mission"><h3>🕳️ Missão Extrema</h3><p>Desafios avançados sobre buracos negros.</p><p class="reward">+500 XP</p></div>
+</div></div></section>
+
+<section><div class="wrap">
+<h2 class="title">👨‍🚀 Carreiras do espaço</h2><p class="subtitle">Descubra profissões que trabalham com ciência e exploração espacial.</p>
+<div class="extraGrid">
+<div class="card career"><div class="icon">👨‍🚀</div><h3>Astronauta</h3><p>Participa de missões e experimentos no espaço.</p></div>
+<div class="card career"><div class="icon">🔭</div><h3>Astrônomo</h3><p>Estuda estrelas, planetas, galáxias e fenômenos cósmicos.</p></div>
+<div class="card career"><div class="icon">🛰️</div><h3>Engenheiro espacial</h3><p>Ajuda a construir veículos, satélites e sistemas espaciais.</p></div>
+<div class="card career"><div class="icon">🤖</div><h3>Cientista de dados</h3><p>Analisa grandes quantidades de dados científicos.</p></div>
+</div></div></section>
+
+<section><div class="wrap">
+<h2 class="title">📅 Calendário astronômico</h2>
+<div class="calendar">
+<div class="calendarItem"><b>🌙 Fases da Lua</b><br><span class="subtitle">Aprenda a identificar cada fase.</span></div>
+<div class="calendarItem"><b>☄️ Chuvas de meteoros</b><br><span class="subtitle">Descubra quando observar meteoros.</span></div>
+<div class="calendarItem"><b>🌒 Eclipses</b><br><span class="subtitle">Entenda como acontecem os eclipses.</span></div>
+</div></div></section>
+
+<section><div class="wrap">
+<h2 class="title">📝 Banco de questões</h2><p class="subtitle">Filtre por tema e dificuldade.</p>
+<div class="questionFilter"><span class="pill">Todas</span><span class="pill">🌍 Astronomia</span><span class="pill">🚀 Astronáutica</span><span class="pill">🌱 Fácil</span><span class="pill">🔥 Difícil</span></div>
+<div class="card"><h3>Questão exemplo</h3><p class="subtitle">Qual é o planeta conhecido por possuir um sistema de anéis muito evidente?</p><button class="btn option" onclick="this.textContent='✓ Saturno — acertou! +20 XP';updateXP(20)">A) Saturno</button><button class="btn option">B) Mercúrio</button><button class="btn option">C) Terra</button></div>
+</div></section>
+
+<section><div class="wrap">
+<div class="premiumStrip"><div><b>💎 Quer liberar tudo?</b><br><span class="subtitle">Tenha acesso aos recursos extras por R$ 5,99.</span></div><a class="btn" href="#premium">Comprar Premium</a></div>
+</div></section>
+<footer>Cosmos ★ — Astronomia e preparação para a OBA<br><br><strong>🚀 Criado por uma criança, para crianças curiosas sobre o Universo.</strong></footer>
+
+<div class="modal" id="modal"><div class="modalBox"><button class="close" onclick="closeModal()">×</button><h2>🚀 Recursos extras</h2><p class="subtitle">Você escolheu o plano de <b>R$ 5,99</b>. Nesta versão do site, o pagamento ainda não está conectado.</p><p class="subtitle">Quando o site for publicado, podemos adicionar um botão de pagamento (por exemplo, Pix/cartão) e liberar automaticamente os recursos premium.</p><button class="btn" onclick="closeModal()">Entendi</button></div></div>
+
+<script>
+const data={
+iniciante:[["🌍 Terra","Por que temos dia e noite?","Porque a Terra gira em torno do próprio eixo."],["🌙 Lua","O que causa as fases da Lua?","Vemos diferentes porções iluminadas da Lua enquanto ela orbita a Terra."],["☀️ Sol","Qual é a estrela do Sistema Solar?","O Sol."]],
+intermediario:[["🪐 Kepler","O que acontece com a velocidade de um planeta quando ele se aproxima do Sol?","Ela aumenta. Pela segunda lei de Kepler, áreas iguais são varridas em tempos iguais."],["🌙 Eclipse","Por que não temos eclipse solar todo mês?","A órbita da Lua é inclinada em relação ao plano da órbita da Terra."],["🚀 Órbita","O que significa um satélite estar em órbita?","Ele está em queda livre contínua ao redor de um corpo, com velocidade suficiente para não cair diretamente sobre ele."]],
+avancado:[["⭐ Estrelas","Por que estrelas muito massivas vivem menos?","Elas consomem seu combustível nuclear a taxas muito maiores, apesar de possuírem mais combustível."],["🕳️ Buraco negro","O que é o horizonte de eventos?","É a fronteira além da qual não há caminho de retorno para um observador externo, nem mesmo para a luz."],["🌌 Cosmologia","O que significa a expansão do Universo?","Em grandes escalas, o espaço entre galáxias não ligadas gravitacionalmente aumenta com o tempo."]]};
+let cur;
+function challenge(){let a=data[document.getElementById("level").value];cur=a[Math.floor(Math.random()*a.length)];document.getElementById("ct").textContent=cur[0];document.getElementById("cq").textContent=cur[1];document.getElementById("ans").textContent="Resposta: "+cur[2];document.getElementById("ans").style.display="none";document.getElementById("challenge").style.display="block"}
+function answer(){if(!cur)challenge();document.getElementById("ans").style.display="block"}
+function openModal(){document.getElementById("modal").style.display="flex"}function closeModal(){document.getElementById("modal").style.display="none"}
+
+let xp=0;
+function updateXP(n){
+ xp+=n;
+ const pe=document.getElementById("profileXP"); if(pe) pe.textContent=xp;
+ let rank="🥉 BRONZE", max=500, pct=(xp/500)*100;
+ if(xp>=3000){rank="💎 PLATINA";pct=100}
+ else if(xp>=1500){rank="🥇 OURO";pct=((xp-1500)/1500)*100}
+ else if(xp>=500){rank="🥈 PRATA";pct=((xp-500)/1000)*100}
+ document.getElementById("rank").textContent=rank;
+ let next=xp<500?500:xp<1500?1500:xp<3000?3000:xp;
+ document.getElementById("xptxt").textContent=xp+" / "+next+" XP";
+ document.getElementById("xpfill").style.width=Math.max(3,Math.min(100,pct))+"%";
+}
+function dailyAnswer(){
+ const a=document.getElementById("dailyans");
+ if(a.style.display==="block")return;
+ a.style.display="block";updateXP(50);
+}
+
+function planet(t,x){document.getElementById("planetTitle").textContent=t;document.getElementById("planetText").textContent=x;document.getElementById("planetModal").style.display="flex"}
+function closePlanet(){document.getElementById("planetModal").style.display="none"}
+function quiz(btn,ok){document.getElementById("quizResult").textContent=ok?"🎉 Acertou! +30 XP":"❌ Quase! Tente novamente.";if(ok)updateXP(30)}
+
+const PT_EN = {"Recursos extras": "Extra features", "Comprar Premium • R$ 5,99": "Buy Premium • R$ 5.99", "Comprar Premium": "Buy Premium", "Quero recursos extras": "Get extra features", "por acesso aos recursos extras": "for extra features access", "por R$ 5,99": "for R$ 5.99", "Quer liberar tudo?": "Want to unlock everything?", "Tenha acesso aos recursos extras por R$ 5,99.": "Get access to extra features for R$ 5.99.", "Desafios e níveis": "Challenges & levels", "Desafio Diário": "Daily Challenge", "Desafios OBA": "OBA Challenges", "Simulado OBA": "OBA Mock Exam", "Sua evolução": "Your progress", "Conheça os planetas": "Explore the planets", "Clique em um planeta para descobrir mais.": "Click a planet to learn more.", "Meu perfil": "My profile", "Explorador do Cosmos": "Cosmos Explorer", "Continue estudando para evoluir.": "Keep studying to level up.", "Missão Espacial #1": "Space Mission #1", "Complete desafios sobre Marte.": "Complete challenges about Mars.", "Recompensa: +250 XP + 🏅 Explorador de Marte": "Reward: +250 XP + 🏅 Mars Explorer", "O céu agora": "The sky now", "Fases da Lua": "Moon Phases", "Aprenda a identificar cada fase.": "Learn to identify each phase.", "Chuvas de meteoros": "Meteor Showers", "Descubra quando observar meteoros.": "Discover when to observe meteors.", "Constelações": "Constellations", "Aprenda a encontrar padrões de estrelas no céu.": "Learn to find star patterns in the sky.", "Quiz relâmpago": "Lightning Quiz", "Qual é o maior planeta do Sistema Solar?": "Which is the largest planet in the Solar System?", "Acertou! +30 XP": "Correct! +30 XP", "Quase! Tente novamente.": "Almost! Try again.", "Medalhas": "Badges", "Desbloqueie conquistas estudando.": "Unlock achievements by studying.", "Enciclopédia Cosmos": "Cosmos Encyclopedia", "Pesquise e descubra novos assuntos.": "Explore and discover new topics.", "Nebulosas": "Nebulae", "Nuvens gigantes de gás e poeira no espaço.": "Giant clouds of gas and dust in space.", "Supernovas": "Supernovae", "Explosões extremamente energéticas de estrelas.": "Extremely energetic stellar explosions.", "Exoplanetas": "Exoplanets", "Planetas que orbitam outras estrelas.": "Planets that orbit other stars.", "Cometas": "Comets", "Corpos gelados que podem formar uma cauda ao se aproximar do Sol.": "Icy bodies that can form a tail as they approach the Sun.", "Mapa do Universo": "Map of the Universe", "Faça uma viagem das nossas vizinhanças até as maiores estruturas conhecidas.": "Travel from our neighborhood to the largest known structures.", "Terra": "Earth", "Sistema Solar": "Solar System", "Via Láctea": "Milky Way", "Grupo Local": "Local Group", "Universo observável": "Observable universe", "Missões espaciais": "Space missions", "Complete missões para ganhar XP.": "Complete missions to earn XP.", "Missão Lua": "Moon Mission", "5 desafios sobre nosso satélite.": "5 challenges about our satellite.", "Missão Marte": "Mars Mission", "5 desafios sobre o planeta vermelho.": "5 challenges about the Red Planet.", "Missão Saturno": "Saturn Mission", "5 desafios sobre gigantes gasosos.": "5 challenges about gas giants.", "Missão Extrema": "Extreme Mission", "Desafios avançados sobre buracos negros.": "Advanced black hole challenges.", "Carreiras do espaço": "Space careers", "Descubra profissões que trabalham com ciência e exploração espacial.": "Discover careers in science and space exploration.", "Astronauta": "Astronaut", "Participa de missões e experimentos no espaço.": "Takes part in missions and experiments in space.", "Astrônomo": "Astronomer", "Estuda estrelas, planetas, galáxias e fenômenos cósmicos.": "Studies stars, planets, galaxies, and cosmic phenomena.", "Engenheiro espacial": "Aerospace engineer", "Ajuda a construir veículos, satélites e sistemas espaciais.": "Helps build spacecraft, satellites, and space systems.", "Cientista de dados": "Data scientist", "Analisa grandes quantidades de dados científicos.": "Analyzes large amounts of scientific data.", "Calendário astronômico": "Astronomical calendar", "Entenda como acontecem os eclipses.": "Learn how eclipses happen.", "Banco de questões": "Question bank", "Filtre por tema e dificuldade.": "Filter by topic and difficulty.", "Todas": "All", "Astronomia": "Astronomy", "Astronáutica": "Astronautics", "Fácil": "Easy", "Difícil": "Hard", "Questão exemplo": "Sample question", "Qual é o planeta conhecido por possuir um sistema de anéis muito evidente?": "Which planet is best known for its prominent ring system?", "Saturno — acertou! +20 XP": "Saturn — correct! +20 XP", "🌙 Mestre da Lua": "🌙 Moon Master", "☀️ Explorador do Sol": "☀️ Sun Explorer", "🪐 Planetas": "🪐 Planet Expert", "🚀 Astronáutica": "🚀 Space Explorer", "Criado por uma criança, para crianças curiosas sobre o Universo.": "Created by a child, for children curious about the Universe.", "Astronomia e preparação para a OBA": "Astronomy and OBA preparation", "Bronze": "Bronze", "Prata": "Silver", "Ouro": "Gold", "Platina": "Platinum", "XP": "XP", "nível": "level"};
+let currentLang = localStorage.getItem("cosmosLang") || "pt";
+const originalTexts = new Map();
+
+function walkTextNodes(root){
+  const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);
+  const nodes=[];
+  let n;
+  while(n=walker.nextNode()) nodes.push(n);
+  return nodes;
+}
+function setLang(lang){
+  currentLang=lang;
+  localStorage.setItem("cosmosLang",lang);
+  walkTextNodes(document.body).forEach(n=>{
+    if(!originalTexts.has(n)) originalTexts.set(n,n.nodeValue);
+    let text=originalTexts.get(n);
+    if(lang==="en"){
+      for(const [pt,en] of Object.entries(PT_EN)){
+        if(text.includes(pt)) text=text.split(pt).join(en);
+      }
+    } else {
+      for(const [pt,en] of Object.entries(PT_EN)){
+        if(text.includes(en)) text=text.split(en).join(pt);
+      }
+    }
+    n.nodeValue=text;
+  });
+  document.documentElement.lang=lang;
+  document.getElementById("langPT")?.classList.toggle("active",lang==="pt");
+  document.getElementById("langEN")?.classList.toggle("active",lang==="en");
+}
+document.addEventListener("DOMContentLoaded",()=>setTimeout(()=>setLang(currentLang),50));
+</script>
+</body>
+</html>
